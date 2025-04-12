@@ -28,4 +28,12 @@ public class StringV2 {
             operation.accept(c);
         }
     }
+
+    public char[] reverse(){
+        char[] reversed = new char[value.length];
+        for (int i = 0; i < value.length; i++) {
+            reversed[i] = value[value.length - 1 - i];
+        }
+        return reversed;
+    }
 }
