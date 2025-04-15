@@ -1,8 +1,8 @@
 package com.gambasoftware.poc;
 
-import java.util.function.Consumer;
+import java.util.Iterator;
 
-public class StringV2 {
+public class StringV2 implements Iterable<Character> {
 
     //todo maybe we should have it in int? to cover all 16 bit chars?
     char[] value;
@@ -23,12 +23,6 @@ public class StringV2 {
         return value.length;
     }
 
-    public void forEach(Consumer<Character> operation) {
-        for (char c : value) {
-            operation.accept(c);
-        }
-    }
-
     public char[] reverse(){
         char[] reversed = new char[value.length];
         for (int i = 0; i < value.length; i++) {
@@ -36,4 +30,38 @@ public class StringV2 {
         }
         return reversed;
     }
+
+    @Override
+    public Iterator<Character> iterator() {
+        return new Iterator<>() {
+            private int index = 0;
+
+            public boolean hasNext() {
+                return index < value.length;
+            }
+
+            public Character next() {
+                return value[index++];
+            }
+        };
+    }
+
+    public char charAt(int index) {
+        if (index < 0 || index >= value.length) {
+            throw new IndexOutOfBoundsException("StringV2 index out of range: " + index);
+        }
+        return value[index];
+    }
+    
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        StringV2 other = (StringV2) obj;
+        if (value.length != other.value.length) return false;
+        for (int i = 0; i < value.length; i++) {
+            if (value[i] != other.value[i]) return false;
+        }
+        return true;
+    }
+    
 }
