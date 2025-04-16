@@ -63,5 +63,8 @@ public class StringV2 implements Iterable<Character> {
         }
         return true;
     }
-    
+
+    public boolean isEmpty(){
+        return value == null || value.length == 0;
+    }
 }

@@ -115,4 +115,20 @@ public class StringV2Test {
         assertArrayEquals(new char[]{}, empty.reverse());
         assertFalse(empty.iterator().hasNext());
     }
+
+    @Test
+    void testIsEmpty_withEmptyString() {
+        StringV2 empty = new StringV2("");
+        assertTrue(empty.isEmpty(), "Expected isEmpty() to return true for empty string");
+    }
+    @Test
+    void testIsEmpty_withNonEmptyString() {
+        StringV2 nonEmpty = new StringV2("hello");
+        assertFalse(nonEmpty.isEmpty(), "Expected isEmpty() to return false for non-empty string");
+    }
+    @Test
+    void testIsEmpty_withNull() {
+        StringV2 withNull = new StringV2(new char[]{});
+        assertTrue(withNull.isEmpty(), "Expected isEmpty() to return true for empty char array");
+    }
 }
