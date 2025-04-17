@@ -19,11 +19,11 @@ public class StringV2 implements Iterable<Character> {
         return value.clone();
     }
 
-    public int length(){
+    public int length() {
         return value.length;
     }
 
-    public char[] reverse(){
+    public char[] reverse() {
         char[] reversed = new char[value.length];
         for (int i = 0; i < value.length; i++) {
             reversed[i] = value[value.length - 1 - i];
@@ -52,7 +52,7 @@ public class StringV2 implements Iterable<Character> {
         }
         return value[index];
     }
-    
+
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -64,7 +64,17 @@ public class StringV2 implements Iterable<Character> {
         return true;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return value == null || value.length == 0;
+    }
+
+    public StringV2 replace(char oldValue, char newValue) {
+        char[] result = value.clone();
+        for (int i = 0; i < value.length; i++) {
+            if (result[i] == oldValue) {
+                result[i] = newValue;
+            }
+        }
+        return new StringV2(result);
     }
 }
