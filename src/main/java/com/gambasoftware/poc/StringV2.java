@@ -77,4 +77,16 @@ public class StringV2 implements Iterable<Character> {
         }
         return new StringV2(result);
     }
+
+    public StringV2 substring(int initialPos, int finalPos) {
+        if (initialPos < 0 || initialPos > finalPos || finalPos >= value.length) {
+            throw new IndexOutOfBoundsException("initialPos or finalPos are out of range: " + 0 + " to " + value.length);
+        }
+        char[] result = new char[finalPos-initialPos];
+        int resultPos = 0;
+        for (int i = initialPos; i < finalPos; i++, resultPos++) {
+            result[resultPos] = value[i];
+        }
+        return new StringV2(result);
+    }
 }

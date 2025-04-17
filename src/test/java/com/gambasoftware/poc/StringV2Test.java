@@ -154,4 +154,40 @@ public class StringV2Test {
         StringV2 stillEmpty = empty.replace('a', 'b');
         assertArrayEquals(new char[]{}, stillEmpty.toArray());
     }
+
+    @Test
+    void testSubstringHappyPath() {
+        StringV2 original = new StringV2("abcdef");
+
+        StringV2 sub = original.substring(1, 4);
+        assertArrayEquals(new char[] {'b', 'c', 'd'}, sub.toArray());
+    }
+
+    @Test
+    void testSubstringEqualRanges() {
+        StringV2 original = new StringV2("abcdef");
+
+        StringV2 empty = original.substring(2, 2);
+        assertArrayEquals(new char[] {}, empty.toArray());
+    }
+
+
+    @Test
+    void testSubstringInitialPosGreaterThanZero() {
+        StringV2 str = new StringV2("abc");
+        assertThrows(IndexOutOfBoundsException.class, () -> str.substring(-1, 2));
+    }
+
+    @Test
+    void testSubstringFinalPosGreaterThanLength() {
+        StringV2 str = new StringV2("abc");
+        assertThrows(IndexOutOfBoundsException.class, () -> str.substring(1, 5));
+    }
+
+    @Test
+    void testSubstringInitialPosGreaterThanFinalPos() {
+        StringV2 str = new StringV2("abc");
+        assertThrows(IndexOutOfBoundsException.class, () -> str.substring(2, 1));
+    }
+
 }
