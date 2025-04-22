@@ -190,4 +190,46 @@ public class StringV2Test {
         assertThrows(IndexOutOfBoundsException.class, () -> str.substring(2, 1));
     }
 
+    @Test
+    void testTrimWithLeadingAndTrailingSpaces() {
+        StringV2 str = new StringV2("   hello world   ");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals("hello world".toCharArray(), trimmed.toArray());
+    }
+
+    @Test
+    void testTrimWithOnlyLeadingSpaces() {
+        StringV2 str = new StringV2("   leading");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals("leading".toCharArray(), trimmed.toArray());
+    }
+
+    @Test
+    void testTrimWithOnlyTrailingSpaces() {
+        StringV2 str = new StringV2("trailing   ");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals("trailing".toCharArray(), trimmed.toArray());
+    }
+
+    @Test
+    void testTrimWithNoSpaces() {
+        StringV2 str = new StringV2("clean");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals("clean".toCharArray(), trimmed.toArray());
+    }
+
+    @Test
+    void testTrimAllSpaces() {
+        StringV2 str = new StringV2("     ");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals(new char[] {}, trimmed.toArray());
+    }
+
+    @Test
+    void testTrimEmptyString() {
+        StringV2 str = new StringV2("");
+        StringV2 trimmed = str.trim();
+        assertArrayEquals(new char[] {}, trimmed.toArray());
+    }
+
 }

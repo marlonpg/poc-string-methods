@@ -82,11 +82,44 @@ public class StringV2 implements Iterable<Character> {
         if (initialPos < 0 || initialPos > finalPos || finalPos >= value.length) {
             throw new IndexOutOfBoundsException("initialPos or finalPos are out of range: " + 0 + " to " + value.length);
         }
-        char[] result = new char[finalPos-initialPos];
+        char[] result = new char[finalPos - initialPos];
         int resultPos = 0;
         for (int i = initialPos; i < finalPos; i++, resultPos++) {
             result[resultPos] = value[i];
         }
         return new StringV2(result);
+    }
+
+    public StringV2 trim() {
+        char[] result = value.clone();
+        boolean startBlank = true;
+        int countStartBlank = 0;
+        int countEndBlank = 0;
+        boolean endBlank = true;
+        for (int i = 0, j = value.length - 1; i < value.length; i++, j--) {
+            if (startBlank && result[i] == ' ') {
+                countStartBlank++;
+            } else {
+                startBlank = false;
+            }
+            if (endBlank && result[j] == ' ') {
+                countEndBlank++;
+            } else {
+                endBlank = false;
+            }
+        }
+        if(countStartBlank == value.length){
+            countEndBlank = 0;
+        }
+        int newArraySize = value.length - (countStartBlank + countEndBlank);
+        char[] trimResult = new char[newArraySize];
+        for (int i = countStartBlank, j=0; i < value.length && j < trimResult.length ; i++,j++) {
+            trimResult[j] = value[i];
+        }
+        return new StringV2(trimResult);
+    }
+
+    public String toString(){
+        return value.toString();
     }
 }
