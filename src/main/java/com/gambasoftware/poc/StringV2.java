@@ -119,7 +119,17 @@ public class StringV2 implements Iterable<Character> {
         return new StringV2(trimResult);
     }
 
-    public String toString(){
-        return value.toString();
+    public int indexOf(char target) {
+        for (int i = 0; i < value.length; i++) {
+            if (value[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        return new String(value);
     }
 }

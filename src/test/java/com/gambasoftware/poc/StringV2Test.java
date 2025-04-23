@@ -229,7 +229,30 @@ public class StringV2Test {
     void testTrimEmptyString() {
         StringV2 str = new StringV2("");
         StringV2 trimmed = str.trim();
+        System.out.println(trimmed);
         assertArrayEquals(new char[] {}, trimmed.toArray());
+    }
+
+    @Test
+    void testIndexOfCharacterFound() {
+        StringV2 str = new StringV2("banana");
+
+        assertEquals(1, str.indexOf('a'), "The first occurrence of 'a' should be at index 1");
+        assertEquals(2, str.indexOf('n'), "The first occurrence of 'n' should be at index 2");
+    }
+
+    @Test
+    void testIndexOfCharacterNotFound() {
+        StringV2 str = new StringV2("banana");
+
+        assertEquals(-1, str.indexOf('z'), "'z' should not be found in the string");
+    }
+
+    @Test
+    void testIndexOfEmptyString() {
+        StringV2 empty = new StringV2("");
+
+        assertEquals(-1, empty.indexOf('a'), "An empty string should return -1 for any character search");
     }
 
 }

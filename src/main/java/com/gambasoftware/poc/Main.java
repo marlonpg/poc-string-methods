@@ -8,7 +8,7 @@ public class Main {
         StringV2 stringV2FromString = new StringV2("value");
 
         System.out.println("Length: " + stringV2.length());
-        System.out.println("toArray: " + stringV2.toArray());
+        System.out.println("toArray: " + stringV2);
         System.out.print("forEach: ");
         stringV2.forEach(System.out::print);
         System.out.println(" ");
