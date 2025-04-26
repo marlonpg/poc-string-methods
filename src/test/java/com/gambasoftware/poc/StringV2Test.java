@@ -255,4 +255,20 @@ public class StringV2Test {
         assertEquals(-1, empty.indexOf('a'), "An empty string should return -1 for any character search");
     }
 
+    @Test
+    void testHighUnicodeCharacterHandling() {
+        // U+1F600 is 😀 (grinning face emoji)
+        String emoji = "\uD83D\uDE00"; // surrogate pair representation of U+1F600
+        StringV2 str = new StringV2(emoji);
+
+        // It will be length 2 because of the surrogate pair
+        assertEquals(2, str.length());
+
+        // Characters aren't handled as full code points
+        assertEquals('\uD83D', str.toArray()[0]); // high surrogate
+        assertEquals('\uDE00', str.toArray()[1]); // low surrogate
+
+        // Should fail: emoji isn't equal to a single char
+        assertNotEquals('😀', str.toArray()[0]); // Can't represent the whole emoji with one char
+    }
 }
